@@ -41,7 +41,12 @@ if ($wnd) {
 
     // If dev mode is on, the bookmarklet previously saved the code server's URL
     // to session storage.
-    var devModeUrl = $wnd.sessionStorage[devModeKey];
+    var devModeUrl = null;
+    try {
+      devModeUrl = $wnd.sessionStorage[devModeKey];
+    } catch(err) {
+      console.info("Could not retrieve Dev Mode url due to: " + err);
+    }
 
     // Apply validation for devModeUrl, if any.
     __DEV_MODE_URL_VALIDATION__
